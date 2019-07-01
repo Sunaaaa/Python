@@ -83,7 +83,7 @@
 
    ![1561707741813](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1561707741813.png)
 
-## 내장형 데이터 타입(Built - in Data Type)
+## 내장형 데이터 타입(Built - in Type)
 
 - 이미 Python에 내장되어 있는 데이터 타입
 
