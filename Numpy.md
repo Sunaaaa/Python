@@ -14,7 +14,6 @@ import numpy as np
   - Numpy의 Array가 많이 사용된다.
   - Pandas와 Matlotlib (그래프 그리기) 의 기본 자료구조로 이용된다.
 - Aliasing 은 np로 통일
-
 - 자주 사용되는 자료구조 
   - 다차원 배열 (n-dimensional Array) = numpy array
     - Python의 List (서로 다른 타입의 데이터가 들어갈 수 있다.) 와 유사함
@@ -27,7 +26,7 @@ import numpy as np
 
 - Python의 List와 Numpy Array의 데이터 타입은 다르다.
 
--  Python의 List 
+- Python의 List 
 
   - list 라는 클래스의 인스턴스를 생성하는 것
 
@@ -51,7 +50,7 @@ import numpy as np
 
     
 
-###  1. np.array()
+### 1. np.array()
 
 - 기존의 List, Tuple등을 이용해서 인자로 이용해 Numpy Array로 변환하는 함수
 
@@ -251,7 +250,7 @@ for i in range(arr.shape[0]):
 
 
 
-## 배열의 구조 변경
+## Numpy Array의 구조 변경
 
 - 데이터의 크기가 변경 전과 후와 같아야 한다.
 - don't care 키워드 **<u>' -1 '</u>** 을 사용하여 다른 설정을 우선 순위로 수행한뒤, 자동으로 값이 설정된다. 
@@ -306,6 +305,199 @@ for i in range(arr.shape[0]):
 - 완전한 복사본이기 때문에 원본의 변경이 적용되지 않는다.
 
   ![1562143429838](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1562143429838.png)
+
+## Numpy Array의 연산
+
+### + 연산 
+
+- List의 경우 + 연산에서 주어진 2개의 List를 연결한다.
+
+  ![1563189533730](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1563189533730.png)
+
+- 2차원 배열의 경우 각각의 Mapping되는 행과 열의 값을 더한다.
+
+  ![1563189570658](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1563189570658.png)
+
+  - 만약, 2개의 2차원 배열의 형태가 다를 경우 broadcasting의 결과로 동일한 Shape으로 확장하여 연산을 수행한다.
+
+    ![1563190176385](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1563190176385.png)
+
+    ![1563190208665](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1563190208665.png)
+
+  - 만약, boradcasting조차 안되는 경우, 연산이 불가하다.
+
+    ![1563190330204](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1563190330204.png)
+
+### 행렬곱 ( 내적 )
+
+- np.matmul( 2차원 배열, 2차원 배열)
+
+- 앞의 행렬의 열과 뒤의 행렬의 행이 같아야 한다.
+
+  ![1563190543066](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1563190543066.png)
+
+### % 연산
+
+- ![1563190899652](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1563190899652.png)
+
+## Numpy Array의 인덱스와 값 추출
+
+#### enumerate 사용
+
+- enumerate 를 사용하여  Numpy Array의 인덱스와 값을 동시에 추출할 수 있다.
+
+- 예 1)
+
+  ```python
+  arr = np.arrange(10,20)
+  for (idx, item) in enumedate(arr):
+  	print('인덱스 : {}, 아이템 : {}'.format(idx,item))
+  ```
+
+  ![1562833821660](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1562833821660.png)
+
+- 예 2)
+
+  ```python
+  arr = np.array([[1,2],[3,4]])
+  for (idx, item) in enumedate(arr):
+  	print('인덱스 : {}, 아이템 : {}'.format(idx,item))
+  ```
+
+  ![1562834577830](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1562834577830.png)
+
+
+
+### Numpy Array의 슬라이싱 ( Slicing )
+
+- Python 의 슬라이싱은 새로운 List를 생성하는 반면, Numpy Array의 슬라이싱은 주어진 영역을 Numpy Array View로 생성한다. 
+
+- View이기 때문에 View와 원본이 함께 갱신된다. 
+
+  ```python
+  arr = np.arange(10,20,1)
+  result = arr[0:3]
+  print(arr)
+  print(result)
+  
+  arr[0]=100
+  print(arr)
+  print(result)
+  ```
+
+  ![1563187746920](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1563187746920.png).
+
+- 1차원 배열
+
+  - arr [0:3] : 0번째 인덱스에서 2번째 인덱스까지
+
+  - arr [0 : : 2] : 0번째 인덱스에서 끝까지 2개씩 증가한다.
+
+  - arr [0 : 8 : 2] : 0번쩨째 인덱스에서 7번째 인덱스까지 2개씩 증가한다.
+
+- 2차원 배열
+
+  - arr [1, : ] : 1번 인덱스의 행 전체
+
+    => 결과 : 1차원 형태의 Numpy array 도출
+
+  - arr [: 2, 3 :] : 처음부터 1번 인덱스까지의 행과 3번 인덱스부터 끝까지의 열
+
+    => 결과 : 2차원 형태의 Numpy array 도출
+
+  ```python
+  # 1차원 배열
+  arr = np.arange(0,12,1)
+  print(arr)
+  arr_1 = arr[0:3]
+  print(arr_1)
+  arr_1 = arr[0::2]
+  print(arr_1)
+  arr_1 = arr[0:8:2]
+  print(arr_1)
+  
+  # 2차원 배열
+  arr = np.arange(0,16,1).reshape(4,-1).copy()
+  print(arr)
+  print(arr[1,2])
+  print(arr[1,:])
+  print(arr[:2,3:])
+  ```
+
+  ![1563188435068](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1563188435068.png)
+
+
+
+## boolean Indexing
+
+- boolean mask를 만들어, True인값만 이용해 Numpy Array의 Indexing을 하는 기법이다.
+
+- 예
+
+  - 정수 형태의 랜덤값을 추출해서 1차원의 Numpy Array에서 짝수만 뽑아내라
+
+  ```python
+  # 1. 랜덤값의 재연을 위해 시드 값을 고정한다.
+  np.rando.seed(10)
+  
+  # 2. 정수 형태의 랜덤값을 추출하여 1치원 Numpy Array를 생성한다.
+  arr = np.random.randint(0,10,(10,))
+  print(arr)
+  #[9 4 0 1 9 0 1 8 9 0]
+  
+  # 3. boolean Indexing 
+  # boolean mask를 통하여 True의 위치만 Indexing 한다.
+  # 3-1. 짝수는 0, 홀수는 1
+  print(arr%2)
+  #[1 0 0 1 1 0 1 0 1 0]
+  
+  # 3-2. 짝수는 True, 홀수는 False
+  print(arr%2==0)
+  #[False  True  True False False  True False  True False  True]
+  
+  # 3-4. True의 위치만 Indexing
+  print(arr[arr%2==0])
+  #[4 0 0 8 0]
+  ```
+
+- 예
+
+  - ![1563190910698](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1563190910698.png)
+
+## Fancy Indexing
+
+- Numpy Array에 index 배열을 이용해서 배열 요소를 참조하는 방법
+
+- 추출하고자 하는 데이터의 인덱스를 나열한다.
+
+- 연속적이지 않은 값에 대한 인덱싱, 슬라이싱이 가능하다.
+
+- 예
+
+  - 정수형 난수를 발생하여 Numpy Array를 생성한다.
+
+  ```python
+  # 1. 랜덤값의 재연을 위해 시드 값을 고정한다.
+  np.rando.seed(10)
+  
+  # 2. 정수 형태의 랜덤값을 추출하여 1치원 Numpy Array를 생성한다.
+  arr = np.random.randint(0,10,(5,5))
+  print(arr)
+  #[[9 4 0 1 9]
+  #[0 1 8 9 0]
+  #[8 6 4 3 0]
+  #[4 6 8 1 8]
+  #[4 1 3 6 5]]
+  
+  # 3. Fancy Indexing 
+  # 3-1. 짝수는 0, 홀수는 1
+  print(arr[1,[0,2,4]])
+  #[0 8 0]
+  ```
+
+  
+
+
 
 # Matplot
 
