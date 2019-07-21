@@ -12,9 +12,9 @@
   3. Machine Learning 
      - 기존의 데이터를 이용하여 프로그램을 학습시킨다. 학습된 결과를 이용해 예측한다.
 
-- Numpy를 사용하기 위해 numpy module을 시스템에 설치 
+- Pandas를 사용하기 위해 pandas module을 시스템에 설치 
 
-  - conda install numpy
+  - conda install pandas
 
     ```python
     import pandas as pd
