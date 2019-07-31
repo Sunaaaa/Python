@@ -77,3 +77,77 @@
   ```
 
   
+
+- random.choice(Non-Emptyseq list)
+
+  : 비어있지 않은 list 중 임의의 0Element 하나를 반환  
+
+  ```python
+  import random
+  list = ["빨","주","노","초","파","남","보"]
+  random_element = 
+  random.choice(list)
+  
+  print(random_element)
+  ```
+
+  
+
+- random.randint(a,b) 
+
+  : a <= N <= b 사이의 난수 생성
+
+  ```python
+  import random
+  
+  random_number = random.randint(2,5)
+  ```
+
+  
+
+- random.shuffle(list)
+
+  : list내의 element들을 섞는다.
+
+  : 인자로 전달된 배열 자체를 shuffle한다. 
+
+  ```python
+  import random
+  list = ["빨","주","노","초","파","남","보"]
+  
+  random.shuffle(list)
+  print(list)
+  ```
+
+  
+
+- 가위 바위 보 
+
+  ```python
+  wintable ={
+      '가위' : '보',
+      '바위' : '가위',
+      '보' : '바위'
+  }
+  
+  def rsp (mine, yours):
+      if mine==yours:
+          return "draw"
+      elif wintable[mine] == yours:
+          return "win"
+      else:
+          return "lose"
+      
+  result = rsp('가위','바위')
+  print(result)
+      
+  messages = {
+      'win' : '이겼다!',
+      'lose' : '졌다..',
+      'draw' : '비겼다!'
+  }
+  
+  print(messages[result])
+  ```
+
+  
